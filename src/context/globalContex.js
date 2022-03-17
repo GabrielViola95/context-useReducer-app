@@ -17,10 +17,15 @@ const initialState = {
     ]
 }
 
-export const globalContext = createContext(initialState);
+export const GlobalContext = createContext(initialState);
 
-export const contextProvider = ({children}) => {
-    return <globalContext.Provider value={initialState}>
+export const ContextProvider = ({children}) => {
+
+    const addTask = () => {
+        console.log("adding a task")
+    }
+
+    return <GlobalContext.Provider value={{...initialState, addTask}} >
         {children}
-    </globalContext.Provider>
+    </GlobalContext.Provider>
 }

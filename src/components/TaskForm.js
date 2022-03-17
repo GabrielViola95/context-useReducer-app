@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { globalContext } from '../context/globalContex'
+import { GlobalContext } from '../context/GlobalContex'
 
 const TaskForm = () => {
 
-  const context = useContext(globalContext);
-
-  console.log(context)
+  const {addTask} = useContext(GlobalContext);
 
   const [task, setTask] = useState({
     title: '',
@@ -19,6 +17,7 @@ const TaskForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(task)
+    addTask();
   }
 
   return (
