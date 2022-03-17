@@ -1,4 +1,6 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
+import appReducer from "./AppReducer";
+import {v4} from 'uuid';
 
 const initialState = {
     tasks: [
@@ -21,11 +23,18 @@ export const GlobalContext = createContext(initialState);
 
 export const ContextProvider = ({children}) => {
 
-    const addTask = () => {
-        console.log("adding a task")
+    const [state, dispatch] = useReducer(appReducer, initialState)
+
+    const addTask = (task) => {
+        // console.log(task)
+        dispatch({type: 'ADD_TASK', payload: {...task, id: v4()}})
     }
 
-    return <GlobalContext.Provider value={{...initialState, addTask}} >
+    const deleteTask = (id) => {
+        dispatch({type: 'DELETE_TASK', payload: id})
+    }
+
+    return <GlobalContext.Provider value={{...state, addTask, deleteTask}} >
         {children}
     </GlobalContext.Provider>
 }

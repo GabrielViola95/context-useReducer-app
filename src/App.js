@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<TaskList/>} />
           <Route path='/add' element={<TaskForm/>} />
+          <Route path='/edit/:id' element={<TaskForm/>} />
         </Routes>
         </ContextProvider>
         </div>

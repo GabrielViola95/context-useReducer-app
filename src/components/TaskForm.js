@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import {  useNavigate, useParams } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContex'
 
 const TaskForm = () => {
 
   const {addTask} = useContext(GlobalContext);
+  let navigate = useNavigate();
 
   const [task, setTask] = useState({
     title: '',
@@ -16,9 +18,14 @@ const TaskForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(task)
-    addTask();
+    addTask(task);
+    navigate.push("/");
   }
+
+  useEffect(()=> {
+    console.log()
+  }, []);
+
 
   return (
     <div className='flex justify-center items-center h-3/4'>
